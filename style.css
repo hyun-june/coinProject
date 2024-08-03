@@ -1,0 +1,172 @@
+body {
+  height: 100%;
+}
+
+/* navbar */
+
+.navbar{
+  padding: 0.3rem;
+}
+
+nav {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  background-color: white;
+}
+
+.navRight {
+  display: flex;
+}
+
+.navbar-text {
+  margin-right: 1rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* bannerBox */
+
+.bannerBox{
+  border: 1px solid lightgray;
+  background-color: #ece4da;
+  border-radius: 50px;
+  padding: 1em;
+  top: 3.5rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.newsSection{
+  border: 1px solid blueviolet;
+  display: flex;
+  width: 40%;
+}
+
+.input-group{
+  width: 20rem;
+}
+
+.input-group-text{
+  border-radius: 20px;
+}
+
+.search-input{
+  border-radius: 20px;
+}
+
+/* main */
+
+main {
+  position: relative;
+  top: 3.5rem;
+}
+
+.mainContainer {
+  padding: 0rem 5rem;
+}
+
+.mainSection {
+  height: 22rem;
+  padding: 1rem;
+}
+
+.innerItem{
+  display: flex;
+}
+
+.innerImg{
+  width: 20rem;
+}
+
+.innerText{
+  text-align: left;
+  padding: 1rem;
+}
+
+.mainRight {
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+/* mainRight */
+
+.mainRight-inner{
+  border: 1px solid lightgray;
+  height: 100%;
+}
+
+.chatSection {
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  text-align: center;
+}
+
+.weatherBox {
+  width: 150px;
+  height: 200px;
+  border: 1px solid blueviolet;
+}
+
+.chatButton {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+}
+
+
+/* card */
+
+.subSection {
+  height: 16rem;
+}
+
+.cardItem{
+  width: 15rem;
+}
+
+.cardImg{
+  height: 8rem;
+}
+
+
+.cardInner{
+  height: 7rem;
+  padding-top: 0.5rem;
+}
+
+/* underSection */
+
+.underSection{
+  height: 17rem;
+  border: 1px solid green;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+h3{
+  text-align: left;
+}
+
+th:first-child{
+  width: 10rem;
+  text-align: left;
+}
+
+th:not(:first-child){
+  text-align: right;
+  width: 8rem;
+}
+
+td{
+  text-align: right;
+
+}
+
+
+
