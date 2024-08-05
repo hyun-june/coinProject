@@ -28,23 +28,38 @@ ul {
 
 /* bannerBox */
 
+.newsSection{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
+}
+
 .bannerBox{
-  border: 1px solid lightgray;
-  background-color: #ece4da;
-  border-radius: 50px;
+  border: 2px solid #eee;	
+  position: relative;
+  z-index: 0;
   padding: 1em;
-  top: 3.5rem;
+  top: 4rem;
   position: relative;
   display: flex;
   justify-content: space-between;
   width: 80%;
+  margin-bottom: 1rem;
 }
 
-.newsSection{
-  border: 1px solid blueviolet;
-  display: flex;
-  width: 40%;
-}
+.bannerBox:before {
+  border-top:2px solid #c6d4c6;
+  border-left:2px solid #c6d4c6;
+  content: '';
+  display: block;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  }
 
 .input-group{
   width: 20rem;
@@ -56,6 +71,14 @@ ul {
 
 .search-input{
   border-radius: 20px;
+}
+
+.vsMinus{
+  color: blue !important;
+}
+
+.vsPlus{
+  color: red !important;
 }
 
 /* main */
@@ -70,7 +93,7 @@ main {
 }
 
 .mainSection {
-  height: 22rem;
+  height: 20rem;
   padding: 1rem;
 }
 
@@ -80,6 +103,7 @@ main {
 
 .innerImg{
   width: 20rem;
+  height: 16rem;
 }
 
 .innerText{
@@ -92,11 +116,20 @@ main {
   flex-wrap: wrap;
 }
 
+.newsLink{
+  color: black;
+  text-decoration: none;
+}
+
 /* mainRight */
+#chart{
+  margin-bottom: 2rem;
+}
 
 .mainRight-inner{
   border: 1px solid lightgray;
   height: 100%;
+  padding: 1rem;
 }
 
 .chatSection {
@@ -120,10 +153,13 @@ main {
 }
 
 
-/* card */
+/* news card */
 
 .subSection {
-  height: 16rem;
+  height: 13rem;
+  padding-left: 2rem;
+  text-align: left;
+  width: 50rem;
 }
 
 .cardItem{
@@ -134,16 +170,23 @@ main {
   height: 8rem;
 }
 
+.news-title{
+  white-space: nowrap; /* 텍스트를 줄 바꿈 없이 한 줄로 유지 */
+  overflow: hidden; /* 넘치는 텍스트 숨기기 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시 */
+  height: 1rem;
+}
 
 .cardInner{
   height: 7rem;
   padding-top: 0.5rem;
 }
 
+
 /* underSection */
 
 .underSection{
-  height: 17rem;
+  height: auto;
   border: 1px solid green;
   padding: 1rem;
   margin-top: 1rem;
@@ -165,8 +208,19 @@ th:not(:first-child){
 
 td{
   text-align: right;
-
 }
 
+.verticalMenu{
+  padding-left: 1rem !important;
+}
 
+.kospiMark{
+  width: 30px;
+}
 
+/* stockhtml */
+.stockSection{
+  position: relative;
+  top: 5rem;
+  width: 90%;
+}
