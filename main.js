@@ -2,21 +2,43 @@ const apiKey = "Pfj0YsU5qSPBCBcWoU%2FX6R6QukRy4q5d0oOdwebFLpXg8elmZl%2FNS6ybDe1k
 let numOfRows = 0; //한 페이지 결과수
 let newsList = [];
 let kospiList = [];
+let stockList = [];
 
 // 주식 데이터 가져오기
 const getStockData = async() => {
-  numOfRows = 200;
+  numOfRows = 30;
   const stockUrl = `https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=${apiKey}&resultType=json&numOfRows=${numOfRows}`;
 
   try{
     const response = await fetch(stockUrl);
     const data = await response.json();
-    const stockData = data.response.body.items;
-    console.log('stockData :',stockData)
+    let stockData = data.response.body.items;
+    stockList = stockData.item;
+    stockRender();
+    console.log('stockData :',stockList)
   } catch (error){
     console.log('Error fetching stockData:',error)
   }
 };
+
+// 주식 데이터 그리기 
+const stockRender = () =>{
+  let stockBoard = stockList.map((item) =>{
+    let changeColor = item.fltRt < 0 ? 'vsMinus' : 'vsPlus'
+   return `
+     <tr>
+    <th scope="row" class="verticalMenu">${item.itmsNm}</th>
+      <td>${item.clpr}</td>
+      <td>${item.hipr}</td>
+      <td>${item.lopr}</td>
+      <td>${item.mkp}</td>
+      <td class="${changeColor}">${item.fltRt}%</td>
+    </tr>
+    `
+}).join(' ');
+  document.getElementById("stock-board").innerHTML = stockBoard;
+} 
+
 
 // 지수 데이터 가져오기
 const getKospiData = async() => {
@@ -60,7 +82,7 @@ const kospiRender = (names) =>{
   });
 
   let kospiIndex = filterKospi.map((item)=>{
-    let vsColor = item.vs < 0 ? 'vsMinus' : 'vsPlus'
+    let changeColor = item.fltRt < 0 ? 'vsMinus' : 'vsPlus'
   return `
   <tr>
     <th scope="row" class="verticalMenu"><img src="${kospiMark}" alt="" class="kospiMark">${item.idxNm}</th>
@@ -68,7 +90,7 @@ const kospiRender = (names) =>{
       <td>${item.hipr}</td>
       <td>${item.lopr}</td>
       <td>${item.mkp}</td>
-      <td class="${vsColor}">${item.vs}%</td>
+      <td class="${changeColor}">${item.fltRt}%</td>
     </tr>`
   }).join(' ');
   document.getElementById("kospi-board").innerHTML = kospiIndex;
@@ -208,8 +230,8 @@ google.charts.load('current', {'packages':['corechart']});
           chartArea: {
             left: 30, // 차트 영역의 왼쪽 여백
             right: 30, // 차트 영역의 오른쪽 여백
-            top: 20, // 차트 영역의 위쪽 여백
-            bottom: 40 // 차트 영역의 아래쪽 여백
+            top: 30, // 차트 영역의 위쪽 여백
+            bottom: 50 // 차트 영역의 아래쪽 여백
           }
         };
 

@@ -1,0 +1,251 @@
+body {
+    height: 100%;
+  }
+  
+  /* navbar */
+  
+  .navbar{
+    padding: 0.3rem;
+  }
+  
+  nav {
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    background-color: white;
+  }
+  
+  .navRight {
+    display: flex;
+  }
+  
+  .navbar-text {
+    margin-right: 1rem;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  /* bannerBox */
+  
+  .newsSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+  }
+  
+  .bannerBox{
+    border: 2px solid #eee;	
+    position: relative;
+    z-index: 0;
+    padding: 1em;
+    top: 4rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-bottom: 1rem;
+  }
+  
+  .bannerBox:before {
+    border-top:2px solid #c6d4c6;
+    border-left:2px solid #c6d4c6;
+    content: '';
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+    }
+  
+  .input-group{
+    width: 20rem;
+  }
+  
+  .input-group-text{
+    border-radius: 20px;
+  }
+  
+  .search-input{
+    border-radius: 20px;
+  }
+  
+  .vsMinus{
+    color: blue !important;
+  }
+  
+  .vsPlus{
+    color: red !important;
+  }
+  
+  /* main */
+  
+  main {
+    position: relative;
+    top: 3.5rem;
+  }
+  
+  .mainContainer {
+    padding: 0rem 5rem;
+  }
+  
+  .mainSection {
+    height: 20rem;
+    padding: 1rem;
+  }
+  
+  .innerItem{
+    display: flex;
+  }
+  
+  .innerImg{
+    width: 20rem;
+    height: 16rem;
+  }
+  
+  .innerText{
+    text-align: left;
+    padding: 1rem;
+  }
+  
+  .mainRight {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .newsLink{
+    color: black;
+    text-decoration: none;
+  }
+  
+  /* mainRight */
+  #chart{
+    margin-bottom: 2rem;
+  }
+  
+  .mainRight-inner{
+    border: 1px solid lightgray;
+    height: 100%;
+    padding: 1rem;
+  }
+  
+  .chatSection {
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    text-align: center;
+  }
+  
+  .weatherBox {
+    width: 150px;
+    height: 200px;
+    border: 1px solid blueviolet;
+  }
+  
+  .chatButton {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+  }
+  
+  
+  /* news card */
+  
+  .subSection {
+    height: 13rem;
+    padding-left: 2rem;
+    text-align: left;
+    width: 50rem;
+  }
+  
+  .cardItem{
+    width: 15rem;
+  }
+  
+  .cardImg{
+    height: 8rem;
+  }
+  
+  .news-title{
+    white-space: nowrap; /* 텍스트를 줄 바꿈 없이 한 줄로 유지 */
+    overflow: hidden; /* 넘치는 텍스트 숨기기 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 ...로 표시 */
+    height: 1rem;
+  }
+  
+  .cardInner{
+    height: 7rem;
+    padding-top: 0.5rem;
+  }
+  
+  
+  /* underSection */
+  
+  .underSection{
+    height: auto;
+    border: 1px solid green;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  
+  h3{
+    text-align: left;
+  }
+  
+  th:first-child{
+    width: 10rem;
+    text-align: left;
+  }
+  
+  th:not(:first-child){
+    text-align: right;
+    width: 8rem;
+  }
+  
+  td{
+    text-align: right;
+  }
+  
+  .verticalMenu{
+    padding-left: 1rem !important;
+  }
+  
+  .kospiMark{
+    width: 30px;
+  }
+  
+  /* stockhtml */
+  .stockSection{
+    position: relative;
+    top: 5rem;
+    width: 90%;
+  }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+  .tab__item {
+    padding: 0.6rem 1.3rem;
+    margin-right: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 2rem;
+    cursor: pointer;
+  }
+  .tab__item.active {
+    display: inline-block;
+    border: 1px solid #6600c7;
+    background-color: #6600c7;
+    color: #fff;
+  }
+  .tab__content {
+    display: none;
+  }
+  .tab__content.active {
+    display: block;
+  }
