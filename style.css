@@ -224,3 +224,23 @@ td{
   top: 5rem;
   width: 90%;
 }
+
+.tabs{
+  display: flex;
+}
+
+.tab-list{
+  border: 1px solid red;
+  padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.tab-item {
+  display: none;
+}
+
+.tab-item.active {
+  display: contents;
+}
+

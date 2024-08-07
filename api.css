@@ -225,27 +225,22 @@ body {
     width: 90%;
   }
 
-  .tab {
+  .tabs{
     display: flex;
-    align-items: center;
-    padding: 1rem;
   }
-  .tab__item {
-    padding: 0.6rem 1.3rem;
-    margin-right: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 2rem;
+
+  .tab-list{
+    border: 1px solid red;
+    padding: 1rem;
+    margin: 1rem;
     cursor: pointer;
   }
-  .tab__item.active {
-    display: inline-block;
-    border: 1px solid #6600c7;
-    background-color: #6600c7;
-    color: #fff;
-  }
-  .tab__content {
+
+  .tab-item {
     display: none;
   }
-  .tab__content.active {
-    display: block;
+
+  .tab-item.active {
+    display: contents;
   }
+  

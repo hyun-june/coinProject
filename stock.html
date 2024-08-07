@@ -52,6 +52,10 @@
     <div class="container-fluid stockSection">
         <div class="row">
             <div class="col">
+              <ul class="tabs">
+                <li class="tab-list" id="kospi">코스피</li>
+                <li class="tab-list" id="kosdaq">코스닥</li>
+              </ul>
                 <table class="table table-sm">
                     <thead>
                         <tr>
@@ -63,9 +67,12 @@
                             <th scope="col">전일</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider" id="stock-board">
-                        <tr>
-                        </tr>
+                    <tbody class="table-group-divider tab__content-wrapper tab-item" id="stock-board-kospi">
+
+                    </tbody>
+
+                    <tbody class="table-group-divider tab__content-wrapper tab-item" id="stock-board-kosdaq">
+
                     </tbody>
                 </table>
             </div>

@@ -3,6 +3,32 @@ let numOfRows = 0; //한 페이지 결과수
 let newsList = [];
 let kospiList = [];
 let stockList = [];
+const KOSPI = 'KOSPI'; 
+const KOSDAQ = 'KOSDAQ';
+const tabs = document.querySelectorAll(".tab-list");
+const tabContents = document.querySelectorAll(".tab-item");
+
+const showTabs = (e) => {
+  const selectedTabId = e.target.id;
+
+  tabs.forEach((tab) => {
+    tab.classList.remove("active");
+  });
+
+  e.target.classList.add("active");
+
+  tabContents.forEach((content) => {
+    content.classList.remove("active");
+  });
+
+  const targetContentId = `stock-board-${selectedTabId}`;
+  document.getElementById(targetContentId).classList.add("active");
+};
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", showTabs);
+});
+
 
 // 주식 데이터 가져오기
 const getStockData = async() => {
@@ -22,21 +48,46 @@ const getStockData = async() => {
 };
 
 // 주식 데이터 그리기 
-const stockRender = () =>{
-  let stockBoard = stockList.map((item) =>{
-    let changeColor = item.fltRt < 0 ? 'vsMinus' : 'vsPlus'
-   return `
-     <tr>
-    <th scope="row" class="verticalMenu">${item.itmsNm}</th>
-      <td>${item.clpr}</td>
-      <td>${item.hipr}</td>
-      <td>${item.lopr}</td>
-      <td>${item.mkp}</td>
-      <td class="${changeColor}">${item.fltRt}%</td>
-    </tr>
-    `
-}).join(' ');
-  document.getElementById("stock-board").innerHTML = stockBoard;
+const stockRender = () => {
+  let filterListKospi = [];
+  let filterListKosdaq = [];
+
+  const tabListFilter = () => {
+    for (let i = 0; i < stockList.length; i++) {
+      if (stockList[i].mrktCtg === KOSPI) {
+        filterListKospi.push(stockList[i]);
+      } else if (stockList[i].mrktCtg === KOSDAQ) {
+        filterListKosdaq.push(stockList[i]);
+      }
+    }
+  };
+
+  tabListFilter();
+
+  console.log("KOSPI", filterListKospi);
+  console.log("KOSDAQ", filterListKosdaq);
+
+  const renderItems = (items) => {
+    return items.map((item) => {
+      let changeColor = item.fltRt < 0 ? 'vsMinus' : 'vsPlus';
+      return `
+      <tr>
+        <th scope="row" class="verticalMenu">${item.itmsNm}</th>
+        <td>${item.clpr}</td>
+        <td>${item.hipr}</td>
+        <td>${item.lopr}</td>
+        <td>${item.mkp}</td>
+        <td class="${changeColor}">${item.fltRt}%</td>
+      </tr>
+      `;
+    }).join(' ');
+  };
+
+  let kospiBoard = renderItems(filterListKospi);
+  let kosdaqBoard = renderItems(filterListKosdaq);
+document.getElementById("stock-board-kospi").innerHTML = kospiBoard;
+document.getElementById("stock-board-kosdaq").innerHTML = kosdaqBoard;
+
 } 
 
 

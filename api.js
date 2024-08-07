@@ -3,10 +3,36 @@ let numOfRows = 0; //한 페이지 결과수
 let newsList = [];
 let kospiList = [];
 let stockList = [];
+const KOSPI = 'KOSPI'; 
+const KOSDAQ = 'KOSDAQ';
+const tabs = document.querySelectorAll(".tab-list");
+const tabContents = document.querySelectorAll(".tab-item");
+
+const showTabs = (e) => {
+  const selectedTabId = e.target.id;
+
+  tabs.forEach((tab) => {
+    tab.classList.remove("active");
+  });
+
+  e.target.classList.add("active");
+
+  tabContents.forEach((content) => {
+    content.classList.remove("active");
+  });
+
+  const targetContentId = `stock-board-${selectedTabId}`;
+  document.getElementById(targetContentId).classList.add("active");
+};
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", showTabs);
+});
+
 
 // 주식 데이터 가져오기
 const getStockData = async() => {
-  numOfRows = 200;
+  numOfRows = 30;
   const stockUrl = `https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=${apiKey}&resultType=json&numOfRows=${numOfRows}`;
 
   try{
@@ -14,6 +40,7 @@ const getStockData = async() => {
     const data = await response.json();
     let stockData = data.response.body.items;
     stockList = stockData.item;
+    stockRender();
     console.log('stockData :',stockList)
   } catch (error){
     console.log('Error fetching stockData:',error)
@@ -21,20 +48,48 @@ const getStockData = async() => {
 };
 
 // 주식 데이터 그리기 
-// const stockRender = () =>{
-//   let stockBoard = stockList.map(item => 
-//     `
-//      <tr>
-//     <th scope="row" class="verticalMenu">${item.itmsNm}</th>
-//       <td>${item.clpr}</td>
-//       <td>${item.hipr}</td>
-//       <td>${item.lopr}</td>
-//       <td>${item.mkp}</td>
-//       <td class="${vsColor}">${item.vs}%</td>
-//     </tr>
-//     `
-//   )
-// }
+const stockRender = () => {
+  let filterListKospi = [];
+  let filterListKosdaq = [];
+
+  const tabListFilter = () => {
+    for (let i = 0; i < stockList.length; i++) {
+      if (stockList[i].mrktCtg === KOSPI) {
+        filterListKospi.push(stockList[i]);
+      } else if (stockList[i].mrktCtg === KOSDAQ) {
+        filterListKosdaq.push(stockList[i]);
+      }
+    }
+  };
+
+  tabListFilter();
+
+  console.log("KOSPI", filterListKospi);
+  console.log("KOSDAQ", filterListKosdaq);
+
+  const renderItems = (items) => {
+    return items.map((item) => {
+      let changeColor = item.fltRt < 0 ? 'vsMinus' : 'vsPlus';
+      return `
+      <tr>
+        <th scope="row" class="verticalMenu">${item.itmsNm}</th>
+        <td>${item.clpr}</td>
+        <td>${item.hipr}</td>
+        <td>${item.lopr}</td>
+        <td>${item.mkp}</td>
+        <td class="${changeColor}">${item.fltRt}%</td>
+      </tr>
+      `;
+    }).join(' ');
+  };
+
+  let kospiBoard = renderItems(filterListKospi);
+  let kosdaqBoard = renderItems(filterListKosdaq);
+document.getElementById("stock-board-kospi").innerHTML = kospiBoard;
+document.getElementById("stock-board-kosdaq").innerHTML = kosdaqBoard;
+
+} 
+
 
 // 지수 데이터 가져오기
 const getKospiData = async() => {
@@ -78,7 +133,7 @@ const kospiRender = (names) =>{
   });
 
   let kospiIndex = filterKospi.map((item)=>{
-    let vsColor = item.vs < 0 ? 'vsMinus' : 'vsPlus'
+    let changeColor = item.fltRt < 0 ? 'vsMinus' : 'vsPlus'
   return `
   <tr>
     <th scope="row" class="verticalMenu"><img src="${kospiMark}" alt="" class="kospiMark">${item.idxNm}</th>
@@ -86,7 +141,7 @@ const kospiRender = (names) =>{
       <td>${item.hipr}</td>
       <td>${item.lopr}</td>
       <td>${item.mkp}</td>
-      <td class="${vsColor}">${item.vs}%</td>
+      <td class="${changeColor}">${item.fltRt}%</td>
     </tr>`
   }).join(' ');
   document.getElementById("kospi-board").innerHTML = kospiIndex;
@@ -235,5 +290,3 @@ google.charts.load('current', {'packages':['corechart']});
 
         chart.draw(data, options);
       }
-
-      
